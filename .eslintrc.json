@@ -1,0 +1,11 @@
+{
+  "extends": "idiomatic",
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "semi": [ 2, "always" ],
+    "dot-notation": [ 2, { "allowKeywords": true, "allowPattern": "" } ],
+    "indent": [ 2, 2, { "SwitchCase": 1 } ]
+  }
+}
