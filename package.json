@@ -13,11 +13,12 @@
     "lint": "eslint .",
     "cover": "nyc --reporter=lcov --reporter=text ava",
     "test": "ava",
-    "check-coverage": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100"
+    "check-coverage": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ta2edchimp/opt-cli.git"
+    "url": "https://github.com/ta2edchimp/opt-cli.git"
   },
   "keywords": [
     "executer",
@@ -37,13 +38,14 @@
   "devDependencies": {
     "all-contributors-cli": "2.0.0-beta3",
     "ava": "0.13.0",
-    "cz-conventional-changelog": "^1.1.5",
+    "cz-conventional-changelog": "1.1.5",
     "eslint": "2.4.0",
     "eslint-config-idiomatic": "2.0.0",
     "ghooks": "1.0.3",
     "npm-run-all": "1.6.0",
     "nyc": "6.1.1",
-    "validate-commit-msg": "2.4.1"
+    "validate-commit-msg": "2.4.1",
+    "semantic-release": "4.3.5"
   },
   "config": {
     "ghooks": {
