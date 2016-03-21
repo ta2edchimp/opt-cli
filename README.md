@@ -25,8 +25,8 @@ Special thanks to [@mgol](https://github.com/mgol) who created the original scri
   - [ ] Code Coverage
 - [ ] Setup a Documentation
   - [ ] Installation & Usage
-  - [ ] Contributors
-  - [ ] Acknowledgements
+  - [x] Contributors
+  - [x] Acknowledgements
   - [ ] Contribution Rules
   - [ ] Badges!!
 - [ ] Setup `semantic-release`
