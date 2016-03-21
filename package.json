@@ -3,6 +3,9 @@
   "version": "0.0.0-semantically-released",
   "description": "Execute CLI Statements based upon Opt-In / Out-Out Rules.",
   "main": "lib/index.js",
+  "bin": {
+    "opt": "bin/index.js"
+  },
   "scripts": {
     "commit": "git-cz",
     "update-contributors": "all-contributors generate",
@@ -29,7 +32,7 @@
   },
   "homepage": "https://github.com/ta2edchimp/opt-cli#readme",
   "dependencies": {
-    "minimist": "1.2.0"
+    "cli": "0.11.2"
   },
   "devDependencies": {
     "all-contributors-cli": "2.0.0-beta3",
