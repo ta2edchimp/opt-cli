@@ -1,0 +1,67 @@
+{
+  "name": "opt-cli",
+  "version": "0.0.0-semantically-released",
+  "description": "Execute CLI Statements based upon Opt-In / Out-Out Rules.",
+  "main": "lib/index.js",
+  "scripts": {
+    "commit": "git-cz",
+    "validate": "npm-run-all --parallel lint test",
+    "lint": "eslint .",
+    "test": "echo \"Warning: no test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ta2edchimp/opt-cli.git"
+  },
+  "keywords": [
+    "executer",
+    "cli",
+    "opt-in",
+    "opt-out"
+  ],
+  "author": "Andreas Windt <email@andreaswindt.com> (http://andreaswindt.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ta2edchimp/opt-cli/issues"
+  },
+  "homepage": "https://github.com/ta2edchimp/opt-cli#readme",
+  "dependencies": {
+    "minimist": "1.2.0"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^1.1.5",
+    "eslint": "2.4.0",
+    "eslint-config-idiomatic": "2.0.0",
+    "ghooks": "1.0.3",
+    "npm-run-all": "1.6.0",
+    "validate-commit-msg": "2.4.1"
+  },
+  "config": {
+    "ghooks": {
+      "commit-msg": "validate-commit-msg",
+      "pre-commit": "npm run validate"
+    },
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "eslintConfig": {
+    "extends": "idiomatic",
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "semi": [
+        2,
+        "always"
+      ],
+      "dot-notation": [
+        2,
+        {
+          "allowKeywords": true,
+          "allowPattern": ""
+        }
+      ]
+    }
+  }
+}
