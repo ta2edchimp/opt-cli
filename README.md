@@ -85,7 +85,7 @@ Using `opt.getExplicitOpts()` you would receive:
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-| [![Kent C. Dodds](https://avatars3.githubusercontent.com/u/1500684?v=3&s=100)<br /><sub>Kent C. Dodds</sub>]()<br />[💻](https://github.com/ta2edchimp/opt-cli/commits?author=kentcdodds) | [![Guilherme J. Tramontina](https://avatars2.githubusercontent.com/u/374635?v=3&s=100)<br /><sub>Guilherme J. Tramontina</sub>]()<br />[💻](https://github.com/ta2edchimp/opt-cli/commits?author=gtramontina) | [![Andreas Windt](https://avatars1.githubusercontent.com/u/262436?v=3&s=100)<br /><sub>Andreas Windt</sub>]()<br />[💻](https://github.com/ta2edchimp/opt-cli/commits?author=ta2edchimp) |
+| [![Kent C. Dodds](https://avatars3.githubusercontent.com/u/1500684?v=3&s=100)<br /><sub>Kent C. Dodds</sub>]()<br />[💻](https://github.com/ta2edchimp/opt-cli/commits?author=kentcdodds) 👀 | [![Guilherme J. Tramontina](https://avatars2.githubusercontent.com/u/374635?v=3&s=100)<br /><sub>Guilherme J. Tramontina</sub>]()<br />[💻](https://github.com/ta2edchimp/opt-cli/commits?author=gtramontina) | [![Andreas Windt](https://avatars1.githubusercontent.com/u/262436?v=3&s=100)<br /><sub>Andreas Windt</sub>]()<br />[💻](https://github.com/ta2edchimp/opt-cli/commits?author=ta2edchimp) [📖](https://github.com/ta2edchimp/opt-cli/commits?author=ta2edchimp) [⚠️](https://github.com/ta2edchimp/opt-cli/commits?author=ta2edchimp) |
 | :---: | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 

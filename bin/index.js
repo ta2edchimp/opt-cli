@@ -3,7 +3,11 @@
 'use strict';
 
 var
+  path = require( 'path' ),
   cli = require( 'cli' ),
+  managePath = require( 'manage-path' ),
+  clone = require( 'lodash.clone' ),
+  spawn = require( 'spawn-command' ),
   opt = require( '../lib/index' );
 
 cli.parse( {
@@ -14,7 +18,11 @@ cli.parse( {
 } );
 
 cli.main( function cliMain( args, options ) {
-  var info = function emptyFn() {};
+  var
+    info = function emptyFn() {},
+    cwd = process.cwd(),
+    env = clone( process.env ),
+    alteredEnvPath;
 
   // invalid arguments: "in" OR "out" have to be specified, as well es "exec"
   if ( ( options.in && options.out ) || ( !options.in && !options.out ) || !options.exec ) {
@@ -36,10 +44,11 @@ cli.main( function cliMain( args, options ) {
     return;
   }
 
-  info( 'args:' );
-  info( JSON.stringify( args ) );
-  info( 'execute all the things: ' + options.exec );
-  cli.exec( options.exec, function dispatchOutput( output ) {
-    console.log( output.join( '\n' ) );
-  } );
+  // prepare PATH env var to include cwd/node_modules/bin
+  alteredEnvPath = managePath( env );
+  alteredEnvPath.unshift( path.resolve( cwd, 'node_modules', '.bin' ) );
+
+  info( 'Execute all the things: ' + options.exec );
+  spawn( options.exec, { stdio: 'inherit', env: env } )
+    .on( 'exit', process.exit );
 } );
