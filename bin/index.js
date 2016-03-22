@@ -4,6 +4,7 @@
 
 var
   cli = require( 'cli' ),
+  spawn = require( 'spawn-command' ),
   opt = require( '../lib/index' );
 
 cli.parse( {
@@ -36,10 +37,7 @@ cli.main( function cliMain( args, options ) {
     return;
   }
 
-  info( 'args:' );
-  info( JSON.stringify( args ) );
-  info( 'execute all the things: ' + options.exec );
-  cli.exec( options.exec, function dispatchOutput( output ) {
-    console.log( output.join( '\n' ) );
-  } );
+  info( 'Execute all the things: ' + options.exec );
+  spawn( options.exec, { stdio: 'inherit', env: process.env } )
+    .on( 'exit', process.exit );
 } );

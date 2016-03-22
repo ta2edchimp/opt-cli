@@ -47,6 +47,7 @@
     "npm-run-all": "1.6.0",
     "nyc": "6.1.1",
     "semantic-release": "4.3.5",
+    "spawn-command": "0.0.2-1",
     "validate-commit-msg": "2.4.1"
   },
   "config": {
