@@ -8,7 +8,7 @@
     "avatar_url": "https://avatars3.githubusercontent.com/u/1500684?v=3",
     "html_url": "https://twitter.com/kentcdodds",
     "contributions": [
-      "code"
+      "code", "review"
     ]
   }, {
     "login": "gtramontina",
@@ -24,7 +24,7 @@
     "avatar_url": "https://avatars1.githubusercontent.com/u/262436?v=3",
     "html_url": "https://twitter.com/ta2edchimp",
     "contributions": [
-      "code"
+      "code", "doc", "test"
     ]
   }]
 }
