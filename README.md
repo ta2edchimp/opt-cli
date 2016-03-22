@@ -1,6 +1,16 @@
 # opt-cli
 Execute CLI Statements based upon Opt-In / Out-Out Rules.
 
+[![Build Status](https://img.shields.io/travis/ta2edchimp/opt-cli/master.svg?style=flat-square)](https://travis-ci.org/ta2edchimp/opt-cli)
+[![Code Coverage](https://img.shields.io/codecov/c/github/ta2edchimp/opt-cli.svg?style=flat-square)](https://codecov.io/github/ta2edchimp/opt-cli)
+[![version](https://img.shields.io/npm/v/opt-cli.svg?style=flat-square)](http://npm.im/opt-cli)
+[![downloads](https://img.shields.io/npm/dm/opt-cli.svg?style=flat-square)](http://npm-stat.com/charts.html?package=opt-cli&from=2016-03-20)
+[![MIT License](https://img.shields.io/npm/l/opt-cli.svg?style=flat-square)](http://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 ## Installation
 
 Simply install locally as a development dependency to your project's package:
