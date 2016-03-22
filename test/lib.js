@@ -2,6 +2,7 @@ import test from 'ava';
 import path from 'path';
 
 const
+  processCwd = process.cwd,
   workingDir = process.cwd(),
   mockedWorkingDirForOptFiles = path.resolve( workingDir, './fixtures/opt-files' ),
   mockedWorkingDirForPackageJson = path.resolve( workingDir, './fixtures/package' );
@@ -11,7 +12,7 @@ test.beforeEach( () => {
 } );
 
 test.afterEach( () => {
-  process.cwd = () => workingDir;
+  process.cwd = processCwd;
 } );
 
 test( 'check explicit opt-ins & opt-outs (.opt-in and .opt-out existing)', t => {
