@@ -1,135 +1,101 @@
 import test from 'ava';
-import path from 'path';
+// import proxyquire from 'proxyquire';
 
 const
-  workingDir = process.cwd(),
-  mockedWorkingDirForOptFiles = path.resolve( workingDir, './fixtures/opt-files' ),
-  mockedWorkingDirForPackageJson = path.resolve( workingDir, './fixtures/package' );
+  proxyquire = require( 'proxyquire' ).noPreserveCache(),
+  processCwd = process.cwd,
+  workingDir = process.cwd();
+
 
 test.beforeEach( () => {
+  process.argv.splice( 2, process.argv.length );
   process.cwd = () => workingDir;
 } );
 
 test.afterEach( () => {
-  process.cwd = () => workingDir;
+  process.cwd = processCwd;
 } );
 
-test( 'check explicit opt-ins & opt-outs (.opt-in and .opt-out existing)', t => {
-  process.cwd = () => mockedWorkingDirForOptFiles;
 
-  const
-    { getExplicitOpts } = require( '../lib/index' ),
-    expectedOpts = {
-      'opted-in-foo-rule': true,
-      'opted-in-bar-rule': true,
-      'opted-out-foo-rule': false,
-      'opted-out-bar-rule': false
+test( 'test execution with insufficient arguments', t => {
+  proxyquire( '../bin/index', {
+    cli: {
+      getUsage: function mockedCliGetUsage() {
+        t.pass();
+      },
+      // prevent proxyquire from caching!
+      '@global': true
+    }
+  } );
+} );
+
+test( 'test execution on not specified opt-in rule', t => {
+  t.plan( 1 );
+
+  process.argv = process.argv.concat( [
+    '--in',
+    'unset-opt-in-rule',
+    '--exec',
+    'echo "opt-cli bin test output #1"',
+    '--verbose'
+  ] );
+
+  proxyquire( '../bin/index', {
+    cli: {
+      info: function mockedCliInfo( message ) {
+        t.same( message, 'Not opted-in to "unset-opt-in-rule".' );
+      },
+      // prevent proxyquire from caching!
+      '@global': true
+    }
+  } );
+} );
+
+test( 'test execution on not specified opt-out rule', t => {
+  t.plan( 2 );
+
+  process.argv = process.argv.concat( [
+    '--out',
+    'unset-opt-out-rule',
+    '--exec',
+    'echo "opt-cli bin test output #2"'
+  ] );
+
+  proxyquire( '../bin/index', {
+    'spawn-command': function mockedSpawn( command ) {
+      t.same( command, 'echo "opt-cli bin test output #2"' );
+      return {
+        on: what => {
+          t.same( what, 'exit' );
+        }
+      };
+    }
+  } );
+} );
+
+test( 'test execution on a specified opt-in rule', t => {
+  t.plan( 1 );
+
+  process.argv = process.argv.concat( [
+    '--out',
+    'set-opt-out-rule',
+    '--exec',
+    'echo "opt-cli bin test output #2"',
+    '--verbose'
+  ] );
+
+  proxyquire( '../bin/index', {
+    '../lib/index': {
+      testOptOut: function mockedLibTestOptOut( opt ) {
+        return opt === 'set-opt-out-rule';
+      }
     },
-    retrievedOpts = getExplicitOpts();
-
-  t.same( retrievedOpts, expectedOpts, 'retrieved opts should equal expected opts' );
-} );
-
-test( 'check explicit opt-ins & opt-outs (via package.json)', t => {
-  process.cwd = () => mockedWorkingDirForPackageJson;
-
-  const
-    { getExplicitOpts } = require( '../lib/index' ),
-    expectedOpts = {
-      'package-json-opted-in-foo-rule': true,
-      'package-json-opted-in-bar-rule': true,
-      'package-json-opted-out-foo-rule': false,
-      'package-json-opted-out-bar-rule': false
-    },
-    retrievedOpts = getExplicitOpts();
-
-  t.same( retrievedOpts, expectedOpts, 'retrieved opts should equal expected opts' );
-} );
-
-test( 'test for particular opt-ins (.opt-in existing)', t => {
-  process.cwd = () => mockedWorkingDirForOptFiles;
-
-  const
-    { testOptIn } = require( '../lib/index' );
-
-  t.true(
-    testOptIn( [ 'opted-in-foo-rule', 'opted-in-bar-rule' ] ),
-    'opted-in-foo-rule & opted-in-bar-rule should be true'
-  );
-
-  t.false(
-    testOptIn( 'opted-in-bazbaz' ),
-    'opted-in-bazbaz should be false'
-  );
-} );
-
-test( 'test for particular opt-ins (via package.json)', t => {
-  process.cwd = () => mockedWorkingDirForPackageJson;
-
-  const
-    { testOptIn } = require( '../lib/index' );
-
-  t.true(
-    testOptIn( [ 'package-json-opted-in-foo-rule', 'package-json-opted-in-bar-rule' ] ),
-    'package-json-opted-in-foo-rule & package-json-opted-in-bar-rule should be true'
-  );
-
-  t.false(
-    testOptIn( 'package-json-opted-in-bazbaz' ),
-    'package-json-opted-in-bazbaz should be false'
-  );
-} );
-
-test( 'test for particular opt-ins (no config existing)', t => {
-  const
-    { testOptIn } = require( '../lib/index' );
-
-  t.false(
-    testOptIn( [ 'opted-in-foo-rule', 'opted-in-bar-rule' ] ),
-    'opted-in-foo-rule & opted-in-bar-rule should be false'
-  );
-} );
-
-test( 'test for particular opt-outs (.opt-out existing)', t => {
-  process.cwd = () => mockedWorkingDirForOptFiles;
-
-  const
-    { testOptOut } = require( '../lib/index' );
-
-  t.true(
-    testOptOut( [ 'opted-out-foo-rule', 'opted-out-bar-rule' ] ),
-    'opted-out-foo-rule & opted-out-bar-rule should be true'
-  );
-
-  t.false(
-    testOptOut( 'opted-out-bazbaz' ),
-    'opted-out-bazbaz should be false'
-  );
-} );
-
-test( 'test for particular opt-outs (package.json existing)', t => {
-  process.cwd = () => mockedWorkingDirForPackageJson;
-
-  const
-    { testOptOut } = require( '../lib/index' );
-
-  t.true(
-    testOptOut( [ 'package-json-opted-out-foo-rule', 'package-json-opted-out-bar-rule' ] ),
-    'package-json-opted-out-foo-rule & package-json-opted-out-bar-rule should be true'
-  );
-
-  t.false(
-    testOptOut( 'package-json-opted-out-bazbaz' ),
-    'package-json-opted-out-bazbaz should be false'
-  );
-} );
-
-test( 'test for particular opt-outs (no config existing)', t => {
-  const
-    { testOptOut } = require( '../lib/index' );
-
-  t.false(
-    testOptOut( [ 'opted-out-foo-rule', 'opted-out-bar-rule' ] ),
-    'opted-out-foo-rule & opted-out-bar-rule should be false'
-  );
+    cli: {
+      info: function mockedCliInfo( message ) {
+        t.same( message, 'Opted-out of "set-opt-out-rule".' );
+      },
+      // prevent proxyquire from caching!
+      '@global': true
+    }
+  } );
 } );
