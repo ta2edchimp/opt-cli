@@ -10,6 +10,8 @@ var
   spawn = require( 'spawn-command' ),
   opt = require( '../lib/index' );
 
+cli.setApp( 'opt' );
+
 cli.parse( {
   in: [ 'i', 'Rule to be opted-in to', 'string' ],
   out: [ 'o', 'Rule to be outed-out to', 'string' ],
