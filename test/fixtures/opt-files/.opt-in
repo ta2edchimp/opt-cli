@@ -1,2 +1,7 @@
+# This is a comment
 opted-in-foo-rule
 opted-in-bar-rule
+
+# The following is a
+# commented out rule
+#opted-in-lol-rule
