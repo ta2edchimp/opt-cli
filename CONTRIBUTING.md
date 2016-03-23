@@ -18,3 +18,14 @@
 11. Make a pull request to `master` on this repository
 12. Get merged
 13. Celebrate 🎉
+
+## Committing and Pushing changes
+
+As stated earlier, please follow [this convention](https://github.com/stevemao/conventional-changelog-angular/blob/master/convention.md) for your commit messages.
+
+Once you are ready to commit the changes, please use the below commands
+
+1. `git add <files to be comitted>`
+2. `$ npm run commit`
+
+... and follow the instruction of the interactive prompt.

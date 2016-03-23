@@ -1,15 +1,16 @@
 # opt-cli
 Execute CLI Statements based upon Opt-In / Out-Out Rules.
 
+[![version](https://img.shields.io/npm/v/opt-cli.svg?style=flat-square)](http://npm.im/opt-cli)
 [![Build Status](https://img.shields.io/travis/ta2edchimp/opt-cli/master.svg?style=flat-square)](https://travis-ci.org/ta2edchimp/opt-cli)
 [![Code Coverage](https://img.shields.io/codecov/c/github/ta2edchimp/opt-cli.svg?style=flat-square)](https://codecov.io/github/ta2edchimp/opt-cli)
-[![version](https://img.shields.io/npm/v/opt-cli.svg?style=flat-square)](http://npm.im/opt-cli)
-[![downloads](https://img.shields.io/npm/dm/opt-cli.svg?style=flat-square)](http://npm-stat.com/charts.html?package=opt-cli&from=2016-03-20)
+[![Dependencies status](https://img.shields.io/david/ta2edchimp/opt-cli.svg?style=flat-square)](https://david-dm.org/ta2edchimp/opt-cli#info=dependencies)
+
 [![MIT License](https://img.shields.io/npm/l/opt-cli.svg?style=flat-square)](http://opensource.org/licenses/MIT)
+[![downloads](https://img.shields.io/npm/dm/opt-cli.svg?style=flat-square)](http://npm-stat.com/charts.html?package=opt-cli&from=2016-03-20)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## Installation
 
@@ -85,7 +86,7 @@ Using `opt.getExplicitOpts()` you would receive:
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-| [![Kent C. Dodds](https://avatars3.githubusercontent.com/u/1500684?v=3&s=100)<br /><sub>Kent C. Dodds</sub>]()<br />[💻](https://github.com/ta2edchimp/opt-cli/commits?author=kentcdodds) 👀 | [![Guilherme J. Tramontina](https://avatars2.githubusercontent.com/u/374635?v=3&s=100)<br /><sub>Guilherme J. Tramontina</sub>]()<br />[💻](https://github.com/ta2edchimp/opt-cli/commits?author=gtramontina) | [![Andreas Windt](https://avatars1.githubusercontent.com/u/262436?v=3&s=100)<br /><sub>Andreas Windt</sub>]()<br />[💻](https://github.com/ta2edchimp/opt-cli/commits?author=ta2edchimp) [📖](https://github.com/ta2edchimp/opt-cli/commits?author=ta2edchimp) [⚠️](https://github.com/ta2edchimp/opt-cli/commits?author=ta2edchimp) |
+| [![Kent C. Dodds](https://avatars3.githubusercontent.com/u/1500684?v=3&s=100)<br /><sub>Kent C. Dodds</sub>](https://twitter.com/kentcdodds)<br />[💻](https://github.com/ta2edchimp/opt-cli/commits?author=kentcdodds) 👀 | [![Guilherme J. Tramontina](https://avatars2.githubusercontent.com/u/374635?v=3&s=100)<br /><sub>Guilherme J. Tramontina</sub>](https://github.com/gtramontina)<br />[💻](https://github.com/ta2edchimp/opt-cli/commits?author=gtramontina) | [![Andreas Windt](https://avatars1.githubusercontent.com/u/262436?v=3&s=100)<br /><sub>Andreas Windt</sub>](https://twitter.com/ta2edchimp)<br />[💻](https://github.com/ta2edchimp/opt-cli/commits?author=ta2edchimp) [📖](https://github.com/ta2edchimp/opt-cli/commits?author=ta2edchimp) [⚠️](https://github.com/ta2edchimp/opt-cli/commits?author=ta2edchimp) |
 | :---: | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
