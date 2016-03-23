@@ -6,7 +6,7 @@
     "login": "kentcdodds",
     "name": "Kent C. Dodds",
     "avatar_url": "https://avatars3.githubusercontent.com/u/1500684?v=3",
-    "html_url": "https://twitter.com/kentcdodds",
+    "profile": "https://twitter.com/kentcdodds",
     "contributions": [
       "code", "review"
     ]
@@ -14,7 +14,7 @@
     "login": "gtramontina",
     "name": "Guilherme J. Tramontina",
     "avatar_url": "https://avatars2.githubusercontent.com/u/374635?v=3",
-    "html_url": "https://github.com/gtramontina",
+    "profile": "https://github.com/gtramontina",
     "contributions": [
       "code"
     ]
@@ -22,7 +22,7 @@
     "login": "ta2edchimp",
     "name": "Andreas Windt",
     "avatar_url": "https://avatars1.githubusercontent.com/u/262436?v=3",
-    "html_url": "https://twitter.com/ta2edchimp",
+    "profile": "https://twitter.com/ta2edchimp",
     "contributions": [
       "code", "doc", "test"
     ]
