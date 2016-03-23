@@ -43,6 +43,7 @@
     "all-contributors-cli": "2.0.0-beta3",
     "ava": "0.13.0",
     "codecov": "1.0.1",
+    "commitizen": "2.7.3",
     "cz-conventional-changelog": "1.1.5",
     "eslint": "2.4.0",
     "eslint-config-idiomatic": "2.0.0",
