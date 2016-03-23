@@ -1,5 +1,4 @@
 import test from 'ava';
-// import proxyquire from 'proxyquire';
 
 const
   proxyquire = require( 'proxyquire' ).noPreserveCache(),
@@ -17,7 +16,7 @@ test.afterEach( () => {
 } );
 
 
-test( 'test execution with insufficient arguments', t => {
+test( 'test execution with insufficient arguments', ( t ) => {
   proxyquire( '../bin/index', {
     cli: {
       getUsage: function mockedCliGetUsage() {
@@ -29,7 +28,7 @@ test( 'test execution with insufficient arguments', t => {
   } );
 } );
 
-test( 'test execution on not specified opt-in rule', t => {
+test( 'test execution on not specified opt-in rule', ( t ) => {
   t.plan( 1 );
 
   process.argv = process.argv.concat( [
@@ -51,7 +50,7 @@ test( 'test execution on not specified opt-in rule', t => {
   } );
 } );
 
-test( 'test execution on not specified opt-out rule', t => {
+test( 'test execution on not specified opt-out rule', ( t ) => {
   t.plan( 2 );
 
   process.argv = process.argv.concat( [
@@ -64,8 +63,9 @@ test( 'test execution on not specified opt-out rule', t => {
   proxyquire( '../bin/index', {
     'spawn-command': function mockedSpawn( command ) {
       t.same( command, 'echo "opt-cli bin test output #2"' );
+
       return {
-        on: what => {
+        on: ( what ) => {
           t.same( what, 'exit' );
         }
       };
@@ -73,7 +73,7 @@ test( 'test execution on not specified opt-out rule', t => {
   } );
 } );
 
-test( 'test execution on a specified opt-in rule', t => {
+test( 'test execution on a specified opt-in rule', ( t ) => {
   t.plan( 1 );
 
   process.argv = process.argv.concat( [

@@ -10,5 +10,10 @@
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true
     }
+  },
+  "rules": {
+    "global-require": [ 0 ],
+    "no-magic-numbers": [ 0 ],
+    "id-length": [ 2, { "exceptions": [ "t" ] } ]
   }
 }
