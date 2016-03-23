@@ -64,8 +64,9 @@
     }
   },
   "nyc": {
-    "exclude": [
-      "test/**/*"
+    "include": [
+      "bin/**/*",
+      "lib/**/*"
     ]
   }
 }
