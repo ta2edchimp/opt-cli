@@ -21,14 +21,15 @@ cli.parse( {
 
 cli.main( function cliMain( args, options ) {
   var
-    info = function emptyFn() {},
+    info = function emptyFn() { }, // eslint-disable-line func-style, no-empty-function
     cwd = process.cwd(),
-    env = clone( process.env ),
-    alteredEnvPath;
+    env = clone( process.env ), // eslint-disable-line no-process-env
+    alteredEnvPath = null;
 
   // invalid arguments: "in" OR "out" have to be specified, as well es "exec"
   if ( ( options.in && options.out ) || ( !options.in && !options.out ) || !options.exec ) {
     cli.getUsage();
+
     return;
   }
 
@@ -38,11 +39,13 @@ cli.main( function cliMain( args, options ) {
 
   if ( options.in && !opt.testOptIn( options.in ) ) {
     info( 'Not opted-in to "' + options.in + '".' );
+
     return;
   }
 
   if ( options.out && opt.testOptOut( options.out ) ) {
     info( 'Opted-out of "' + options.out + '".' );
+
     return;
   }
 

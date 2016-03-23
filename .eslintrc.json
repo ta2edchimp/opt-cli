@@ -1,11 +1,7 @@
 {
-  "extends": "idiomatic",
-  "env": {
-    "node": true
-  },
+  "extends": "ta2edchimp",
   "rules": {
-    "semi": [ 2, "always" ],
-    "dot-notation": [ 2, { "allowKeywords": true, "allowPattern": "" } ],
-    "indent": [ 2, 2, { "SwitchCase": 1 } ]
+    "max-len": [ 0 ],
+    "require-jsdoc": [ 0 ]
   }
 }

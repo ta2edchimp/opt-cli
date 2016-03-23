@@ -15,7 +15,7 @@ test.afterEach( () => {
   process.cwd = processCwd;
 } );
 
-test( 'check explicit opt-ins & opt-outs (.opt-in and .opt-out existing)', t => {
+test( 'check explicit opt-ins & opt-outs (.opt-in and .opt-out existing)', ( t ) => {
   process.cwd = () => mockedWorkingDirForOptFiles;
 
   const
@@ -31,7 +31,7 @@ test( 'check explicit opt-ins & opt-outs (.opt-in and .opt-out existing)', t => 
   t.same( retrievedOpts, expectedOpts, 'retrieved opts should equal expected opts' );
 } );
 
-test( 'check explicit opt-ins & opt-outs (via package.json)', t => {
+test( 'check explicit opt-ins & opt-outs (via package.json)', ( t ) => {
   process.cwd = () => mockedWorkingDirForPackageJson;
 
   const
@@ -47,7 +47,7 @@ test( 'check explicit opt-ins & opt-outs (via package.json)', t => {
   t.same( retrievedOpts, expectedOpts, 'retrieved opts should equal expected opts' );
 } );
 
-test( 'test for particular opt-ins (.opt-in existing)', t => {
+test( 'test for particular opt-ins (.opt-in existing)', ( t ) => {
   process.cwd = () => mockedWorkingDirForOptFiles;
 
   const
@@ -64,7 +64,7 @@ test( 'test for particular opt-ins (.opt-in existing)', t => {
   );
 } );
 
-test( 'test for particular opt-ins (via package.json)', t => {
+test( 'test for particular opt-ins (via package.json)', ( t ) => {
   process.cwd = () => mockedWorkingDirForPackageJson;
 
   const
@@ -81,7 +81,7 @@ test( 'test for particular opt-ins (via package.json)', t => {
   );
 } );
 
-test( 'test for particular opt-ins (no config existing)', t => {
+test( 'test for particular opt-ins (no config existing)', ( t ) => {
   const
     { testOptIn } = require( '../lib/index' );
 
@@ -91,7 +91,7 @@ test( 'test for particular opt-ins (no config existing)', t => {
   );
 } );
 
-test( 'test for particular opt-outs (.opt-out existing)', t => {
+test( 'test for particular opt-outs (.opt-out existing)', ( t ) => {
   process.cwd = () => mockedWorkingDirForOptFiles;
 
   const
@@ -108,7 +108,7 @@ test( 'test for particular opt-outs (.opt-out existing)', t => {
   );
 } );
 
-test( 'test for particular opt-outs (package.json existing)', t => {
+test( 'test for particular opt-outs (package.json existing)', ( t ) => {
   process.cwd = () => mockedWorkingDirForPackageJson;
 
   const
@@ -125,7 +125,7 @@ test( 'test for particular opt-outs (package.json existing)', t => {
   );
 } );
 
-test( 'test for particular opt-outs (no config existing)', t => {
+test( 'test for particular opt-outs (no config existing)', ( t ) => {
   const
     { testOptOut } = require( '../lib/index' );
 
