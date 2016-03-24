@@ -1,5 +1,5 @@
 # This is a comment
-opted-out-foo-rule
+opted-out-foo-rule # inline comments should work, too!
 opted-out-bar-rule
 
 # The following is a
