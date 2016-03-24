@@ -1,5 +1,5 @@
 # opt-cli
-Execute CLI Statements based upon Opt-In / Out-Out Rules.
+Execute CLI Statements based upon opt-in / out-out Rules.
 
 [![version](https://img.shields.io/npm/v/opt-cli.svg?style=flat-square)](http://npm.im/opt-cli)
 [![Build Status](https://img.shields.io/travis/ta2edchimp/opt-cli/master.svg?style=flat-square)](https://travis-ci.org/ta2edchimp/opt-cli)
@@ -20,44 +20,72 @@ Simply install locally as a development dependency to your project's package:
 npm install --save-dev opt-cli
 ```
 
-## Command Line Usage
+## Intended usage
+Opting in/out of a configured tasks, **best use case is for ghooks**.
+[This discussion](https://github.com/gtramontina/ghooks/issues/48#issuecomment-194002689) is the main motivation behind this module.
 
-The intended usage is within an npm script, for example to opt-in to commit or to opt-out of commit hooks:
+You can check out the [eslint-find-new-rules/package.json](https://github.com/kentcdodds/eslint-find-new-rules/blob/master/package.json#L67) for reference.
 
-```JSON
-"ghooks": {
-  "precommit": "opt --in precommit --exec \"make test\"",
-  "prepush": "opt --out prepush --exec \"make lint\"",
-}
-```
-
-Given you these files and their content, the hooks above will be executed:
-
-**.opt-in**
-```
-precommit
-```
-
-**.opt-out**
+### `opt --in`
 
 ```
-prepush
-```
-
-Alternatively, you may specify these rules within an npm module's `package.json` file:
-
-```JSON
-  "config": {
-    "opt": {
-      "in": [ "precommit" ],
-      "out": [ "prepush" ]
-    }
+"config": {
+  "ghooks": {
+    "pre-commit": "opt --in pre-commit --exec 'npm run validate'"
   }
+},
 ```
 
-**Behavior:**
-If you specify `opt --in` rule then you MUST have the string specified in the `.opt-in` file (one rule per file) or in your `package.json`'s `config.opt.in` Array. If you specify an `opt --out` then you MUST NOT have the string specified in the `.opt-out` file or in your `package.json`'s `config.opt.out` Array, respectively.
-The command specified as `--exec` optoin would be what to execute in the scenario that it passes the test.
+While `commit`ing, `npm run validate` **will not be executed** by default.
+However, one can **opt in by creating a `.opt-in` file in the root of the project, with the content `pre-commit`**
+
+#### `.opt-in`
+
+Each line in the `.opt-in` file, is the keyword used after the `opt --in` rule.
+
+So for the above example, it's `pre-commit`
+
+```
+cat .opt-in
+# "ghooks": {
+#   "pre-commit": "opt --in pre-commit --exec 'npm run validate'"
+# }
+pre-commit # the keyword used after the opt --in command
+```
+
+### `opt --out`
+
+`opt --out` works exactly, the opposite way of `opt --in`.
+
+```
+"config": {
+  "ghooks": {
+    "pre-commit": "opt --out pre-commit --exec 'npm run validate'"
+  }
+},
+```
+
+In this case, `npm run validate` **will be executed** before any changes can be `commit`ed.
+In order to **opt out, you have to create a `.opt-out` file in the root of the project, with the content `pre-commit`**
+
+#### `.opt-out`
+
+Similar to `.opt-in` file, each line in `.opt-out` file, is the keyword used after the `opt --out` rule.
+
+So for the above example, it's `pre-commit`
+
+```
+cat .opt-in
+# "ghooks": {
+#   "pre-commit": "opt --out pre-commit --exec 'npm run validate'"
+# }
+pre-commit # the keyword used after the opt --out command
+```
+
+* ** don't forget to update `.gitignore` to ignore this file.**
+* `opt-in`, `opt-out` files can contain multiple rules
+* ** every line must contain only a single rule.**
+* `#` can be used to comment any rule.
 
 ## Use As Library
 
