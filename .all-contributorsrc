@@ -26,5 +26,13 @@
     "contributions": [
       "code", "doc", "test"
     ]
+  }, {
+    "login": "sarbbottam",
+    "name": "Sarbbottam Bandyopadhyay",
+    "avatar_url": "https://avatars1.githubusercontent.com/u/949380?v=3",
+    "profile": "https://twitter.com/sarbbottam",
+    "contributions": [
+      "doc"
+    ]
   }]
 }
