@@ -28,7 +28,7 @@ You can check out the [eslint-find-new-rules/package.json](https://github.com/ke
 
 ### `opt --in`
 
-```
+```JSON
 "config": {
   "ghooks": {
     "pre-commit": "opt --in pre-commit --exec 'npm run validate'"
@@ -57,7 +57,7 @@ pre-commit # the keyword used after the opt --in command
 
 `opt --out` works exactly, the opposite way of `opt --in`.
 
-```
+```JSON
 "config": {
   "ghooks": {
     "pre-commit": "opt --out pre-commit --exec 'npm run validate'"
@@ -98,17 +98,40 @@ var opt = require( 'opt' );
 Given the example setup from above, usage would be as follows:
 
 ```JavaScript
-opt.testOptIn( 'precommit' ) === true
-opt.testOptOut( 'prepush' ) === true
+opt.testOptIn( 'pre-commit' ) === true
+opt.testOptOut( 'pre-push' ) === true
 ```
 
 Using `opt.getExplicitOpts()` you would receive:
 
 ```JavaScript
 {
-  precommit: true,
-  prepush: false
+  'pre-commit': true,
+  'pre-push': false
 }
+```
+
+## Advanced Usage
+
+Rules to opt-into or opt-out of can also be specified using ...
+
+- ... an `in` or `out` array of a `package.json`'s `config.opt` field:
+
+```JSON
+"config": {
+  "opt": {
+    "in": [ "pre-commit" ],
+    "out": [ "pre-push" ]
+  }
+},
+```
+
+- ... the environment variables `OPT_IN` and `OPT_OUT`:
+
+```
+# Delimit multiple rules with ":" on *nix / ";" on Win
+export OPT_IN="pre-commit"
+export OPT_OUT="pre-push"
 ```
 
 ## Contributors
