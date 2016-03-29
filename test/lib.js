@@ -1,7 +1,9 @@
 import test from 'ava';
 import path from 'path';
+import clone from 'lodash.clone';
 
 const
+  processEnv = clone( process.env ),
   processCwd = process.cwd,
   workingDir = process.cwd(),
   mockedWorkingDirForOptFiles = path.resolve( workingDir, './fixtures/opt-files' ),
@@ -13,6 +15,7 @@ test.beforeEach( () => {
 
 test.afterEach( () => {
   process.cwd = processCwd;
+  process.env = processEnv;
 } );
 
 test( 'check explicit opt-ins & opt-outs (.opt-in and .opt-out existing)', ( t ) => {
@@ -41,6 +44,24 @@ test( 'check explicit opt-ins & opt-outs (via package.json)', ( t ) => {
       'package-json-opted-in-bar-rule': true,
       'package-json-opted-out-foo-rule': false,
       'package-json-opted-out-bar-rule': false
+    },
+    retrievedOpts = getExplicitOpts();
+
+  t.same( retrievedOpts, expectedOpts, 'retrieved opts should equal expected opts' );
+} );
+
+test( 'check explicit opt-ins & opt-outs (via env vars)', ( t ) => {
+  process.env = clone( processEnv );
+  process.env.OPT_IN = 'ENV-VAR-OPTED-IN-FOO-RULE:ENV-VAR-OPTED-IN-BAR-RULE'; // eslint-disable-line id-match
+  process.env.OPT_OUT = 'ENV-VAR-OPTED-OUT-FOO-RULE:ENV-VAR-OPTED-OUT-BAR-RULE'; // eslint-disable-line id-match
+
+  const
+    { getExplicitOpts } = require( '../lib/index' ),
+    expectedOpts = {
+      'ENV-VAR-OPTED-IN-FOO-RULE': true,
+      'ENV-VAR-OPTED-IN-BAR-RULE': true,
+      'ENV-VAR-OPTED-OUT-FOO-RULE': false,
+      'ENV-VAR-OPTED-OUT-BAR-RULE': false
     },
     retrievedOpts = getExplicitOpts();
 
@@ -78,6 +99,24 @@ test( 'test for particular opt-ins (via package.json)', ( t ) => {
   t.false(
     testOptIn( 'package-json-opted-in-bazbaz' ),
     'package-json-opted-in-bazbaz should be false'
+  );
+} );
+
+test( 'test for particular opt-ins (env var existing)', ( t ) => {
+  process.env = clone( processEnv );
+  process.env.OPT_IN = 'ENV-VAR-OPTED-IN-FOO-RULE:ENV-VAR-OPTED-IN-BAR-RULE'; // eslint-disable-line id-match
+
+  const
+    { testOptIn } = require( '../lib/index' );
+
+  t.true(
+    testOptIn( [ 'ENV-VAR-OPTED-IN-FOO-RULE', 'ENV-VAR-OPTED-IN-BAR-RULE' ] ),
+    'ENV-VAR-OPTED-IN-FOO-RULE & ENV-VAR-OPTED-IN-BAR-RULE should be true'
+  );
+
+  t.false(
+    testOptIn( 'ENV-VAR-OPTED-IN-BAZBAZ' ),
+    'ENV-VAR-OPTED-IN-BAZBAZ should be false'
   );
 } );
 
@@ -122,6 +161,24 @@ test( 'test for particular opt-outs (package.json existing)', ( t ) => {
   t.false(
     testOptOut( 'package-json-opted-out-bazbaz' ),
     'package-json-opted-out-bazbaz should be false'
+  );
+} );
+
+test( 'test for particular opt-outs (env var existing)', ( t ) => {
+  process.env = clone( processEnv );
+  process.env.OPT_OUT = 'ENV-VAR-OPTED-OUT-FOO-RULE:ENV-VAR-OPTED-OUT-BAR-RULE'; // eslint-disable-line id-match
+
+  const
+    { testOptOut } = require( '../lib/index' );
+
+  t.true(
+    testOptOut( [ 'ENV-VAR-OPTED-OUT-FOO-RULE', 'ENV-VAR-OPTED-OUT-BAR-RULE' ] ),
+    'ENV-VAR-OPTED-OUT-FOO-RULE & ENV-VAR-OPTED-OUT-BAR-RULE should be true'
+  );
+
+  t.false(
+    testOptOut( 'ENV-VAR-OPTED-OUT-BAZBAZ' ),
+    'ENV-VAR-OPTED-OUT-BAZBAZ should be false'
   );
 } );
 
