@@ -92,7 +92,7 @@ pre-commit # the keyword used after the opt --out command
 You may also include opt-cli as a library:
 
 ```JavaScript
-var opt = require( 'opt' );
+var opt = require( 'opt-cli' );
 ```
 
 Given the example setup from above, usage would be as follows:
