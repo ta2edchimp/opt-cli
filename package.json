@@ -45,7 +45,7 @@
     "codecov": "1.0.1",
     "commitizen": "2.7.6",
     "cz-conventional-changelog": "1.1.5",
-    "eslint": "2.7.0",
+    "eslint": "2.8.0",
     "eslint-config-ta2edchimp": "1.1.0",
     "ghooks": "1.2.1",
     "npm-run-all": "1.7.0",
