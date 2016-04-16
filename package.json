@@ -1,7 +1,7 @@
 {
   "name": "opt-cli",
   "version": "0.0.0-semantically-released",
-  "description": "Execute CLI Statements based upon Opt-In / Out-Out Rules.",
+  "description": "Execute CLI Statements based upon Opt-In / Opt-Out Rules.",
   "main": "lib/index.js",
   "bin": {
     "opt": "bin/index.js"

@@ -42,7 +42,7 @@ test( 'test execution on not specified opt-in rule', ( t ) => {
   proxyquire( '../bin/index', {
     cli: {
       info: function mockedCliInfo( message ) {
-        t.same( message, 'Not opted-in to "unset-opt-in-rule".' );
+        t.deepEqual( message, 'Not opted-in to "unset-opt-in-rule".' );
       },
       // prevent proxyquire from caching!
       '@global': true
@@ -62,11 +62,11 @@ test( 'test execution on not specified opt-out rule', ( t ) => {
 
   proxyquire( '../bin/index', {
     'spawn-command': function mockedSpawn( command ) {
-      t.same( command, 'echo "opt-cli bin test output #2"' );
+      t.deepEqual( command, 'echo "opt-cli bin test output #2"' );
 
       return {
         on: ( what ) => {
-          t.same( what, 'exit' );
+          t.deepEqual( what, 'exit' );
         }
       };
     }
@@ -92,7 +92,7 @@ test( 'test execution on a specified opt-in rule', ( t ) => {
     },
     cli: {
       info: function mockedCliInfo( message ) {
-        t.same( message, 'Opted-out of "set-opt-out-rule".' );
+        t.deepEqual( message, 'Opted-out of "set-opt-out-rule".' );
       },
       // prevent proxyquire from caching!
       '@global': true
