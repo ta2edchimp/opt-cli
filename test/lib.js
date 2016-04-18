@@ -31,7 +31,7 @@ test( 'check explicit opt-ins & opt-outs (.opt-in and .opt-out existing)', ( t )
     },
     retrievedOpts = getExplicitOpts();
 
-  t.same( retrievedOpts, expectedOpts, 'retrieved opts should equal expected opts' );
+  t.deepEqual( retrievedOpts, expectedOpts, 'retrieved opts should equal expected opts' );
 } );
 
 test( 'check explicit opt-ins & opt-outs (via package.json)', ( t ) => {
@@ -47,7 +47,7 @@ test( 'check explicit opt-ins & opt-outs (via package.json)', ( t ) => {
     },
     retrievedOpts = getExplicitOpts();
 
-  t.same( retrievedOpts, expectedOpts, 'retrieved opts should equal expected opts' );
+  t.deepEqual( retrievedOpts, expectedOpts, 'retrieved opts should equal expected opts' );
 } );
 
 test( 'check explicit opt-ins & opt-outs (via env vars)', ( t ) => {
@@ -65,7 +65,7 @@ test( 'check explicit opt-ins & opt-outs (via env vars)', ( t ) => {
     },
     retrievedOpts = getExplicitOpts();
 
-  t.same( retrievedOpts, expectedOpts, 'retrieved opts should equal expected opts' );
+  t.deepEqual( retrievedOpts, expectedOpts, 'retrieved opts should equal expected opts' );
 } );
 
 test( 'test for particular opt-ins (.opt-in existing)', ( t ) => {
