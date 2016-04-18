@@ -10,7 +10,7 @@ node_js:
   - '4'
   - '0.10'
 before_install:
-  - if [[ `node -v | sed 's/[^0-9\.]//g'` < 4 ]]; then npm i -g npm@^2.0.0; else npm i -g npm@^3.0.0; fi
+  - npm i -g npm@^3.0.0
 before_script:
   - npm prune
 script:
