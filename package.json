@@ -40,7 +40,7 @@
     "spawn-command": "0.0.2-1"
   },
   "devDependencies": {
-    "all-contributors-cli": "2.0.0-beta8",
+    "all-contributors-cli": "3.0.1",
     "ava": "0.14.0",
     "codecov": "1.0.1",
     "commitizen": "2.8.1",
