@@ -51,7 +51,7 @@
     "ghooks": "1.2.1",
     "npm-run-all": "1.8.0",
     "nyc": "6.4.2",
-    "proxyquire": "1.7.7",
+    "proxyquire": "1.7.9",
     "semantic-release": "4.3.5",
     "validate-commit-msg": "2.6.1"
   },
