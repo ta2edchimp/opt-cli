@@ -75,16 +75,16 @@ Similar to `.opt-in` file, each line in `.opt-out` file, is the keyword used aft
 So for the above example, it's `pre-commit`
 
 ```
-cat .opt-in
+cat .opt-out
 # "ghooks": {
 #   "pre-commit": "opt --out pre-commit --exec 'npm run validate'"
 # }
 pre-commit # the keyword used after the opt --out command
 ```
 
-* ** don't forget to update `.gitignore` to ignore this file.**
+* **don't forget to update `.gitignore` to ignore this file.**
 * `opt-in`, `opt-out` files can contain multiple rules
-* ** every line must contain only a single rule.**
+* every line must contain only a single rule.
 * `#` can be used to comment any rule.
 
 ## Use As Library
