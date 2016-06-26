@@ -8,10 +8,11 @@ var
   managePath = require( 'manage-path' ),
   clone = require( 'lodash.clone' ),
   spawn = require( 'spawn-command' ),
-  opt = require( '../lib/index' );
+  opt = require( '../lib/index' ),
+  pkg = require( '../package.json' );
 
 program
-  // .version( 'foo' )
+  .version( pkg.version )
   .description( 'Execute CLI Statements based upon Opt-In / Opt-Out Rules.' )
   .option( '-i, --in [rule]', 'Rule to be opted-in to' )
   .option( '-o, --out [rule]', 'Rule to be outed-out of' )
