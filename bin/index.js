@@ -3,23 +3,35 @@
 'use strict';
 
 var
+  program = require( 'commander' ),
   path = require( 'path' ),
-  cli = require( 'cli' ),
   managePath = require( 'manage-path' ),
   clone = require( 'lodash.clone' ),
   spawn = require( 'spawn-command' ),
   opt = require( '../lib/index' );
 
-cli.setApp( 'opt' );
+program
+  // .version( 'foo' )
+  .description( 'Execute CLI Statements based upon Opt-In / Opt-Out Rules.' )
+  .option( '-i, --in [rule]', 'Rule to be opted-in to' )
+  .option( '-o, --out [rule]', 'Rule to be outed-out of' )
+  .option( '-e, --exec <command>', 'Command to execute when opted-in to or not opted-out of the given rule' )
+  .option( '--verbose', 'Output additional details' );
 
-cli.parse( {
-  in: [ 'i', 'Rule to be opted-in to', 'string' ],
-  out: [ 'o', 'Rule to be outed-out to', 'string' ],
-  exec: [ 'e', 'Command to execute when opted-in or not opted-out of the given rule', 'string' ],
-  verbose: [ false, 'Output additional details', 'bool' ]
+program.on( '--help', function customHelp() {
+  console.log( // eslint-disable-line no-console
+    '  Please specify\n\n' +
+    '    - either a rule to be opted-in to or out of\n' +
+    '    - a command to execute\n\n' +
+    '  See https://www.npmjs.com/package/opt-cli for detailed usage instructions\n'
+  );
 } );
 
-cli.main( function cliMain( args, options ) {
+program.parse( process.argv );
+
+cliMain();
+
+function cliMain() {
   var
     info = function emptyFn() { }, // eslint-disable-line func-style, no-empty-function
     cwd = process.cwd(),
@@ -27,24 +39,24 @@ cli.main( function cliMain( args, options ) {
     alteredEnvPath = null;
 
   // invalid arguments: "in" OR "out" have to be specified, as well es "exec"
-  if ( ( options.in && options.out ) || ( !options.in && !options.out ) || !options.exec ) {
-    cli.getUsage();
+  if ( ( program.in && program.out ) || ( !program.in && !program.out ) || !program.exec ) {
+    program.help();
 
     return;
   }
 
-  if ( options.verbose ) {
-    info = cli.info;
+  if ( program.verbose ) {
+    info = console.log; // eslint-disable-line no-console
   }
 
-  if ( options.in && !opt.testOptIn( options.in ) ) {
-    info( 'Not opted-in to "' + options.in + '".' );
+  if ( program.in && !opt.testOptIn( program.in ) ) {
+    info( 'Not opted-in to "' + program.in + '".' );
 
     return;
   }
 
-  if ( options.out && opt.testOptOut( options.out ) ) {
-    info( 'Opted-out of "' + options.out + '".' );
+  if ( program.out && opt.testOptOut( program.out ) ) {
+    info( 'Opted-out of "' + program.out + '".' );
 
     return;
   }
@@ -53,7 +65,7 @@ cli.main( function cliMain( args, options ) {
   alteredEnvPath = managePath( env );
   alteredEnvPath.unshift( path.resolve( cwd, 'node_modules', '.bin' ) );
 
-  info( 'Execute all the things: ' + options.exec );
-  spawn( options.exec, { stdio: 'inherit', env: env } )
+  info( 'Execute all the things: ' + program.exec );
+  spawn( program.exec, { stdio: 'inherit', env: env } )
     .on( 'exit', process.exit );
-} );
+}

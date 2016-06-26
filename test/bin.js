@@ -1,9 +1,11 @@
+/* eslint no-console: 0 */
 import test from 'ava';
 
 const
   proxyquire = require( 'proxyquire' ).noPreserveCache(),
   processCwd = process.cwd,
-  workingDir = process.cwd();
+  workingDir = process.cwd(),
+  consoleLog = console.log;
 
 
 test.beforeEach( () => {
@@ -13,19 +15,44 @@ test.beforeEach( () => {
 
 test.afterEach( () => {
   process.cwd = processCwd;
+  console.log = consoleLog;
 } );
 
 
 test( 'test execution with insufficient arguments', ( t ) => {
-  proxyquire( '../bin/index', {
-    cli: {
-      getUsage: function mockedCliGetUsage() {
+  const
+    commander = {
+      evts: [],
+      help() {
+        commander.evts.forEach( ( custHelp ) => {
+          custHelp();
+        } );
         t.pass();
+      },
+      on( event, func ) {
+        if ( event === '--help' ) {
+          commander.evts.push( func );
+        }
+      },
+      description() {
+        return commander;
+      },
+      option() {
+        return commander;
+      },
+      parse() {
+        return commander;
       },
       // prevent proxyquire from caching!
       '@global': true
-    }
-  } );
+    };
+
+  console.log = ( message ) => {
+    t.regex( message, /[^]Please specify[^]/ );
+  };
+
+  t.plan( 2 );
+  proxyquire( '../bin/index', { commander } );
 } );
 
 test( 'test execution on not specified opt-in rule', ( t ) => {
@@ -39,15 +66,11 @@ test( 'test execution on not specified opt-in rule', ( t ) => {
     '--verbose'
   ] );
 
-  proxyquire( '../bin/index', {
-    cli: {
-      info: function mockedCliInfo( message ) {
-        t.deepEqual( message, 'Not opted-in to "unset-opt-in-rule".' );
-      },
-      // prevent proxyquire from caching!
-      '@global': true
-    }
-  } );
+  console.log = ( message ) => {
+    t.deepEqual( message, 'Not opted-in to "unset-opt-in-rule".' );
+  };
+
+  proxyquire( '../bin/index', { } );
 } );
 
 test( 'test execution on not specified opt-out rule', ( t ) => {
@@ -61,7 +84,7 @@ test( 'test execution on not specified opt-out rule', ( t ) => {
   ] );
 
   proxyquire( '../bin/index', {
-    'spawn-command': function mockedSpawn( command ) {
+    'spawn-command'( command ) {
       t.deepEqual( command, 'echo "opt-cli bin test output #2"' );
 
       return {
@@ -84,15 +107,14 @@ test( 'test execution on a specified opt-in rule', ( t ) => {
     '--verbose'
   ] );
 
+  console.log = ( message ) => {
+    t.deepEqual( message, 'Opted-out of "set-opt-out-rule".' );
+  };
+
   proxyquire( '../bin/index', {
     '../lib/index': {
-      testOptOut: function mockedLibTestOptOut( opt ) {
+      testOptOut( opt ) {
         return opt === 'set-opt-out-rule';
-      }
-    },
-    cli: {
-      info: function mockedCliInfo( message ) {
-        t.deepEqual( message, 'Opted-out of "set-opt-out-rule".' );
       },
       // prevent proxyquire from caching!
       '@global': true

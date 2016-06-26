@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/ta2edchimp/opt-cli#readme",
   "dependencies": {
-    "cli": "0.11.2",
+    "commander": "2.9.0",
     "lodash.clone": "4.3.2",
     "manage-path": "2.0.0",
     "spawn-command": "0.0.2-1"
