@@ -34,6 +34,9 @@ test( 'test execution with insufficient arguments', ( t ) => {
           commander.evts.push( func );
         }
       },
+      version() {
+        return commander;
+      },
       description() {
         return commander;
       },
