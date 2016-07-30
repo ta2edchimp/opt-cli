@@ -47,7 +47,7 @@
     "cz-conventional-changelog": "1.1.6",
     "eslint": "2.13.1",
     "eslint-config-idiomatic": "2.1.0",
-    "eslint-config-ta2edchimp": "1.1.1",
+    "eslint-config-ta2edchimp": "1.1.2",
     "ghooks": "1.2.4",
     "npm-run-all": "2.3.0",
     "nyc": "6.6.1",
