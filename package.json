@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "all-contributors-cli": "3.0.7",
-    "ava": "0.16.0",
+    "ava": "0.18.2",
     "codecov": "1.0.1",
     "commitizen": "2.8.6",
     "cz-conventional-changelog": "1.2.0",
