@@ -44,7 +44,7 @@
     "ava": "0.16.0",
     "codecov": "1.0.1",
     "commitizen": "2.8.6",
-    "cz-conventional-changelog": "1.2.0",
+    "cz-conventional-changelog": "2.0.0",
     "eslint": "2.13.1",
     "eslint-config-idiomatic": "2.1.0",
     "eslint-config-ta2edchimp": "1.1.2",
