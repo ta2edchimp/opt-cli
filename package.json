@@ -9,6 +9,7 @@
   "scripts": {
     "commit": "git-cz",
     "update-contributors": "all-contributors generate",
+    "auto-update-contributors": "./script/update-contributors.sh",
     "validate": "npm-run-all --parallel lint cover --sequential check-coverage",
     "lint": "eslint .",
     "cover": "nyc --all --reporter=lcov --reporter=text ava",
