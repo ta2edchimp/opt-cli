@@ -6,8 +6,8 @@ const
   processEnv = clone( process.env ),
   processCwd = process.cwd,
   workingDir = process.cwd(),
-  mockedWorkingDirForOptFiles = path.resolve( workingDir, './fixtures/opt-files' ),
-  mockedWorkingDirForPackageJson = path.resolve( workingDir, './fixtures/package' );
+  mockedWorkingDirForOptFiles = path.resolve( workingDir, './test/fixtures/opt-files' ),
+  mockedWorkingDirForPackageJson = path.resolve( workingDir, './test/fixtures/package' );
 
 test.beforeEach( () => {
   process.cwd = () => workingDir;
