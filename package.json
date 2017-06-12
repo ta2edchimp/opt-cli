@@ -6,6 +6,9 @@
   "bin": {
     "opt": "bin/index.js"
   },
+  "engines": {
+    "node": ">=4"
+  },
   "scripts": {
     "commit": "git-cz",
     "update-contributors": "all-contributors generate",
