@@ -37,26 +37,26 @@
   },
   "homepage": "https://github.com/ta2edchimp/opt-cli#readme",
   "dependencies": {
-    "commander": "2.9.0",
+    "commander": "2.11.0",
     "lodash.clone": "4.5.0",
     "manage-path": "2.0.0",
     "spawn-command": "0.0.2-1"
   },
   "devDependencies": {
-    "all-contributors-cli": "4.3.0",
-    "ava": "0.19.1",
-    "codecov": "2.2.0",
+    "all-contributors-cli": "4.4.0",
+    "ava": "0.21.0",
+    "codecov": "2.3.0",
     "commitizen": "2.9.6",
     "cz-conventional-changelog": "2.0.0",
-    "eslint": "3.19.0",
+    "eslint": "4.4.1",
     "eslint-config-idiomatic": "2.1.2",
     "eslint-config-ta2edchimp": "1.1.2",
     "ghooks": "2.0.0",
     "npm-run-all": "4.0.2",
-    "nyc": "11.0.2",
+    "nyc": "11.1.0",
     "proxyquire": "1.8.0",
     "semantic-release": "6.3.6",
-    "validate-commit-msg": "2.12.2"
+    "validate-commit-msg": "2.14.0"
   },
   "config": {
     "ghooks": {
