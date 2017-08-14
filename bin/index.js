@@ -6,7 +6,6 @@ var
   program = require( 'commander' ),
   path = require( 'path' ),
   managePath = require( 'manage-path' ),
-  clone = require( 'lodash.clone' ),
   spawn = require( 'spawn-command' ),
   opt = require( '../lib/index' ),
   pkg = require( '../package.json' );
@@ -36,7 +35,18 @@ function cliMain() {
   var
     info = function emptyFn() { }, // eslint-disable-line func-style, no-empty-function
     cwd = process.cwd(),
-    env = clone( process.env ), // eslint-disable-line no-process-env
+    // eslint-disable-next-line id-match
+    env = Object.keys( process.env )
+      // eslint-disable-next-line no-undefined
+      .filter( ( key ) => process.env[ key ] !== undefined )
+      .reduce(
+        ( accumulator, key ) => {
+          accumulator[ key ] = process.env[ key ];
+
+          return accumulator;
+        },
+        {}
+      ),
     alteredEnvPath = null;
 
   // invalid arguments: "in" OR "out" have to be specified, as well es "exec"
