@@ -1,12 +1,13 @@
 /* eslint no-console: 0 */
+import path from 'path';
 import test from 'ava';
 
 const
   proxyquire = require( 'proxyquire' ).noPreserveCache(),
   processCwd = process.cwd,
   workingDir = process.cwd(),
-  consoleLog = console.log;
-
+  consoleLog = console.log,
+  mockedWorkingDirForOptFiles = path.join( __dirname, 'fixtures/opt-files' );
 
 test.beforeEach( () => {
   process.argv.splice( 2, process.argv.length );
@@ -123,4 +124,38 @@ test( 'test execution on a specified opt-in rule', ( t ) => {
       '@global': true
     }
   } );
+} );
+
+
+test( 'test listing explicit configurations with none set', ( t ) => {
+  t.plan( 1 );
+
+  process.argv = process.argv.concat( [ '--list' ] );
+
+  console.log = ( message ) => {
+    t.deepEqual( message, 'No explict opt-in or opt-out configuration found.' );
+  };
+  proxyquire( '../bin/index', {} );
+} );
+
+test( 'test listing explicit configurations with in and out set', ( t ) => {
+  t.plan( 1 );
+
+  process.cwd = () => mockedWorkingDirForOptFiles;
+  process.argv = process.argv.concat( [ '--list' ] );
+
+  console.log = ( message ) => {
+    t.deepEqual(
+      message,
+      `Opted-in to:
+ - opted-in-foo-rule
+ - opted-in-bar-rule
+
+Opted-out of:
+ - opted-out-foo-rule
+ - opted-out-bar-rule`
+    );
+  };
+
+  proxyquire( '../bin/index', {} );
 } );
