@@ -16,6 +16,7 @@ program
   .option( '-i, --in [rule]', 'Rule to be opted-in to' )
   .option( '-o, --out [rule]', 'Rule to be outed-out of' )
   .option( '-e, --exec <command>', 'Command to execute when opted-in to or not opted-out of the given rule' )
+  .option( '-l, --list', 'List explicitly set opt-in and opt-out rules' )
   .option( '--verbose', 'Output additional details' );
 
 program.on( '--help', function customHelp() {
@@ -49,8 +50,11 @@ function cliMain() {
       ),
     alteredEnvPath = null;
 
-  // invalid arguments: "in" OR "out" have to be specified, as well es "exec"
-  if ( ( program.in && program.out ) || ( !program.in && !program.out ) || !program.exec ) {
+  // invalid arguments: ("in" OR "out" have to be specified, as well es "exec") OR "list" has to be requested
+  if (
+    ( ( program.in && program.out ) || ( !program.in && !program.out ) || !program.exec ) &&
+    !program.list
+  ) {
     program.help();
 
     return;
@@ -72,6 +76,12 @@ function cliMain() {
     return;
   }
 
+  if ( program.list ) {
+    listExplicitOpts();
+
+    return;
+  }
+
   // prepare PATH env var to include cwd/node_modules/bin
   alteredEnvPath = managePath( env );
   alteredEnvPath.unshift( path.resolve( cwd, 'node_modules', '.bin' ) );
@@ -79,4 +89,36 @@ function cliMain() {
   info( 'Execute all the things: ' + program.exec );
   spawn( program.exec, { stdio: 'inherit', env: env } )
     .on( 'exit', process.exit );
+}
+
+function listExplicitOpts() {
+  var explictOpts = opt.getExplicitOpts(),
+    flags = Object.keys( explictOpts ), // eslint-disable-line id-match
+    sorted = { in: [], out: [] },
+    output = [];
+
+  // Filter results to print in-out
+  sorted = flags.reduce(
+    function sortExplicit( accumulator, key ) {
+      accumulator[ explictOpts[ key ] ? 'in' : 'out' ].push( key );
+
+      return accumulator;
+    },
+    sorted
+  );
+
+  if ( sorted.in.length ) {
+    output.push( 'Opted-in to:\n' + ' - ' + sorted.in.join( '\n - ' ) );
+  }
+
+  if ( sorted.out.length ) {
+    output.push( 'Opted-out of:\n' + ' - ' + sorted.out.join( '\n - ' ) );
+  }
+
+  if ( !flags.length ) {
+    output.push( 'No explict opt-in or opt-out configuration found.' );
+  }
+
+  // eslint-disable-next-line no-console
+  console.log( output.join( '\n\n' ) );
 }
