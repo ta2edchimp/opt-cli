@@ -52,8 +52,14 @@ test( 'check explicit opt-ins & opt-outs (via package.json)', ( t ) => {
 
 test( 'check explicit opt-ins & opt-outs (via env vars)', ( t ) => {
   process.env = clone( processEnv );
-  process.env.OPT_IN = 'ENV-VAR-OPTED-IN-FOO-RULE:ENV-VAR-OPTED-IN-BAR-RULE'; // eslint-disable-line id-match
-  process.env.OPT_OUT = 'ENV-VAR-OPTED-OUT-FOO-RULE:ENV-VAR-OPTED-OUT-BAR-RULE'; // eslint-disable-line id-match
+  process.env.OPT_IN = [ // eslint-disable-line id-match
+    'ENV-VAR-OPTED-IN-FOO-RULE',
+    'ENV-VAR-OPTED-IN-BAR-RULE'
+  ].join( path.delimiter );
+  process.env.OPT_OUT = [ // eslint-disable-line id-match
+    'ENV-VAR-OPTED-OUT-FOO-RULE',
+    'ENV-VAR-OPTED-OUT-BAR-RULE'
+  ].join( path.delimiter );
 
   const
     { getExplicitOpts } = require( '../lib/index' ),
@@ -104,7 +110,10 @@ test( 'test for particular opt-ins (via package.json)', ( t ) => {
 
 test( 'test for particular opt-ins (env var existing)', ( t ) => {
   process.env = clone( processEnv );
-  process.env.OPT_IN = 'ENV-VAR-OPTED-IN-FOO-RULE:ENV-VAR-OPTED-IN-BAR-RULE'; // eslint-disable-line id-match
+  process.env.OPT_IN = [ // eslint-disable-line id-match
+    'ENV-VAR-OPTED-IN-FOO-RULE',
+    'ENV-VAR-OPTED-IN-BAR-RULE'
+  ].join( path.delimiter );
 
   const
     { testOptIn } = require( '../lib/index' );
@@ -166,7 +175,10 @@ test( 'test for particular opt-outs (package.json existing)', ( t ) => {
 
 test( 'test for particular opt-outs (env var existing)', ( t ) => {
   process.env = clone( processEnv );
-  process.env.OPT_OUT = 'ENV-VAR-OPTED-OUT-FOO-RULE:ENV-VAR-OPTED-OUT-BAR-RULE'; // eslint-disable-line id-match
+  process.env.OPT_OUT = [ // eslint-disable-line id-match
+    'ENV-VAR-OPTED-OUT-FOO-RULE',
+    'ENV-VAR-OPTED-OUT-BAR-RULE'
+  ].join( path.delimiter );
 
   const
     { testOptOut } = require( '../lib/index' );
