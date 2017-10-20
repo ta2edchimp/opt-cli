@@ -7,7 +7,7 @@ const
   processCwd = process.cwd,
   workingDir = process.cwd(),
   consoleLog = console.log,
-  mockedWorkingDirForOptFiles = path.join( __dirname, 'fixtures/opt-files' );
+  mockedWorkingDirForOptFiles = path.resolve( workingDir, './test/fixtures/opt-files' );
 
 test.beforeEach( () => {
   process.argv.splice( 2, process.argv.length );
