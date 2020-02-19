@@ -45,7 +45,7 @@
   "devDependencies": {
     "all-contributors-cli": "4.4.0",
     "ava": "0.21.0",
-    "codecov": "2.3.0",
+    "codecov": "3.6.5",
     "commitizen": "2.9.6",
     "cz-conventional-changelog": "2.0.0",
     "eslint": "4.4.1",
